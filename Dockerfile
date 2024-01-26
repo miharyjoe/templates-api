@@ -9,7 +9,7 @@ ENV DB_NAME=$DB_NAME
 ARG DB_PASSWORD
 ENV DB_PASSWORD=$DB_PASSWORD
 
-RUN /usr/bin/gradle clean build
+RUN /usr/bin/gradle --no-daemon clean build
 
 # Use the official OpenJDK 17 base image
 FROM openjdk:17
