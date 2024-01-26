@@ -9,6 +9,10 @@ ENV DB_NAME=$DB_NAME
 ARG DB_PASSWORD
 ENV DB_PASSWORD=$DB_PASSWORD
 
+# Change permissions for gradlew
+RUN chmod +x ./gradlew
+
+# Run the Gradle build
 RUN ./gradlew clean build
 
 # Use the official OpenJDK 17 base image
