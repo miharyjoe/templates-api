@@ -1,5 +1,5 @@
 # Use the official Maven image to build the application
-FROM maven:3.8.4 AS build
+FROM gradle:7.3.3-jdk11 AS build
 WORKDIR /app
 COPY . /app
 ARG DB_URL
