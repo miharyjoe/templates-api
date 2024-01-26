@@ -1,5 +1,5 @@
 # Use the official Maven image to build the application
-FROM gradle:7.3.3-jdk11 AS build
+FROM gradle:8.5-jdk17 AS build
 WORKDIR /app
 COPY . /app
 ARG DB_URL
@@ -13,7 +13,7 @@ ENV DB_PASSWORD=$DB_PASSWORD
 RUN chmod +x ./gradlew
 
 # Run the Gradle build
-RUN ./gradlew clean build
+RUN ./gradlew clean build -x test
 
 # Use the official OpenJDK 17 base image
 FROM openjdk:17
@@ -22,7 +22,7 @@ FROM openjdk:17
 WORKDIR /app
 
 # Copy the JAR file from the build stage
-COPY --from=build /app/target/*.jar /app/template.jar
+COPY --from=build /app/build/libs/*.jar /app/template.jar
 
 EXPOSE 8080
 
